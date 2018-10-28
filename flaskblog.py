@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 # creating an app variable, setting this as an instance of this flask. __name__ is just the name of the module. __name__ = __main__
 app = Flask(__name__)
 posts = [
@@ -43,12 +43,11 @@ Another way:
 
 @app.route("/about")
 def about():
-    return render_template('about.html')  # "<h1>About Page</h1>"  # We could return all of our html things here with ''' ''', but with a lot of pages and routes, this would become really ugly and unwieldy. The best way would be to use templates.
+    return render_template('about.html', title="About")  # "<h1>About Page</h1>"  # We could return all of our html things here with ''' ''', but with a lot of pages and routes, this would become really ugly and unwieldy. The best way would be to use templates.
 
 
 # If we ever want multiple routes handled by the same function, it's as simple as adding another decorator.
 # like /home.
-
 
 
 # Name IS main if we run this module directly with python. It is not the case if we import this module.
