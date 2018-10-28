@@ -1,6 +1,20 @@
-from flask import Flask
+from flask import Flask, render_template
 # creating an app variable, setting this as an instance of this flask. __name__ is just the name of the module. __name__ = __main__
 app = Flask(__name__)
+posts = [
+    {
+        'author': 'Nick C',
+        'title': 'Blog Post 1',
+        'content': 'First post content',
+        'date_posted': 'Oct 20, 2018'
+    },
+    {
+        'author': 'Jane D',
+        'title': 'Blog Post 2',
+        'content': 'Second post content',
+        'date_posted': 'Oct 27, 2018'
+    }
+]
 
 
 # This is how you create a route in the simplest form. We create routes using decorators in flask.
@@ -8,7 +22,7 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/home")
 def home():
-    return "<h1>Home Page!</h1>"
+    return render_template('home.html', posts=posts)
 
 
 # To run:
@@ -29,7 +43,8 @@ Another way:
 
 @app.route("/about")
 def about():
-    return "<h1>About Page</h1>"
+    return render_template('about.html')  # "<h1>About Page</h1>"  # We could return all of our html things here with ''' ''', but with a lot of pages and routes, this would become really ugly and unwieldy. The best way would be to use templates.
+
 
 # If we ever want multiple routes handled by the same function, it's as simple as adding another decorator.
 # like /home.
