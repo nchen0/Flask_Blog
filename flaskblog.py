@@ -1,6 +1,10 @@
 from flask import Flask, render_template, url_for
 # creating an app variable, setting this as an instance of this flask. __name__ is just the name of the module. __name__ = __main__
+from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
+
+app.config('SECRET_KEY') = '529b1f33a3f14f7095089cdc1814dcbb'
+
 posts = [
     {
         'author': 'Nick C',
@@ -48,6 +52,17 @@ def about():
 
 # If we ever want multiple routes handled by the same function, it's as simple as adding another decorator.
 # like /home.
+
+@app.route("/register")
+def register():
+    form = RegistrationForm()
+    return render_template('register.html', title="Register", form=form)
+
+
+@app.route("/login")
+def register():
+    form = LoginForm()
+    return render_template('login.html', title="Login", form=form)
 
 
 # Name IS main if we run this module directly with python. It is not the case if we import this module.
