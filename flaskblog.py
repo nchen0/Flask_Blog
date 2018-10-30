@@ -1,9 +1,9 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 # creating an app variable, setting this as an instance of this flask. __name__ is just the name of the module. __name__ = __main__
 from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
 
-app.config('SECRET_KEY') = '529b1f33a3f14f7095089cdc1814dcbb'
+app.config['SECRET_KEY'] = '529b1f33a3f14f7095089cdc1814dcbb'
 
 posts = [
     {
@@ -53,15 +53,25 @@ def about():
 # If we ever want multiple routes handled by the same function, it's as simple as adding another decorator.
 # like /home.
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
+    # will tell us if the form validated when submitted. We can use a flash message for this.
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('register.html', title="Register", form=form)
 
 
-@app.route("/login")
-def register():
+@app.route("/login", methods=['GET', 'POST'])
+def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash(f'You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash(f'Login Unsuccessful, Please check username and password', 'danger')
     return render_template('login.html', title="Login", form=form)
 
 
