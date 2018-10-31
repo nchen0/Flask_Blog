@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, flash, redirect
 # creating an app variable, setting this as an instance of this flask. __name__ is just the name of the module. __name__ = __main__
 from flask_sqlalchemy import SQLAlchemy  # this is for our database
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
@@ -14,6 +15,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 # Creating a database instance:
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)  # To initialize the bcrypt
+login_manager = LoginManager(app)
+
 
 # start with: from flaskblog import db
 # use db.create_all() in python terminal to add the site.db that we created above.

@@ -1,5 +1,11 @@
-from flaskblog import db
+from flaskblog import db, login_manager
 from datetime import datetime  # to get current date/time.
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # Get the user with the user id
+    return User.query.get(int())
 
 
 class User(db.Model):
