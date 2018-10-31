@@ -1,14 +1,15 @@
 from flaskblog import db, login_manager
 from datetime import datetime  # to get current date/time.
+from flask_login import UserMixin
 
 
 @login_manager.user_loader
 def load_user(user_id):
     # Get the user with the user id
-    return User.query.get(int())
+    return User.query.get(int(user_id))
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     # 20 notates a 20 max char limit.
     username = db.Column(db.String(20), unique=True, nullable=False)

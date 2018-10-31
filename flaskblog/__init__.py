@@ -16,7 +16,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)  # To initialize the bcrypt
 login_manager = LoginManager(app)
-
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
 
 # start with: from flaskblog import db
 # use db.create_all() in python terminal to add the site.db that we created above.
