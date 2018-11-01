@@ -8,11 +8,13 @@ Django==2.1.2
 Flask==1.0.2
 Flask-Bcrypt==0.7.1
 Flask-Login==0.4.1
+Flask-Markdown==0.3
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 gunicorn==19.9.0
 itsdangerous==1.1.0
 Jinja2==2.10
+Markdown==3.0.1
 MarkupSafe==1.0
 numpy==1.15.1
 packaging==17.1
