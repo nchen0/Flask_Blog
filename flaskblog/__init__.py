@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy  # this is for our database
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flaskext.markdown import Markdown
 
 app = Flask(__name__)
 
@@ -16,6 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)  # To initialize the bcrypt
 login_manager = LoginManager(app)
+Markdown(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
