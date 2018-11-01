@@ -1,1 +1,1 @@
-web: gunicorn ghoulish-broomstick-24706 --log-file -
+web: gunicorn run:app --log-file -
